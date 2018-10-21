@@ -4,7 +4,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'r
 
 export const LineChartMetric = props => {
     return (
-        <div>
+        <div style={{visibility: (props.showChart ? 'visible' : 'hidden')}}>
         <h2>{props.title}</h2>
             <LineChart
                 width={600}

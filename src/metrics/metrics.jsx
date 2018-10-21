@@ -13,7 +13,8 @@ class Metrics extends Component {
                 initial_date: '15/10/2018',
                 final_date: '15/10/2018',
                 medicoesFetch: [],
-                medicoesChart: []
+                medicoesChart: [],
+                mostrar_datas: ''
             };
         this.handleChangeInitialDate = this.handleChangeInitialDate.bind(this);
         this.handleChangeFinalDate = this.handleChangeFinalDate.bind(this);
@@ -29,8 +30,12 @@ class Metrics extends Component {
     }
 
     readMetrics(initial_date, final_date) {
+        let mostrar_datas = true;
+        if(initial_date == final_date){
+            mostrar_datas = false;
+        }
         axios.get(`http://localhost:8080/medicoes?initial_date=${initial_date}&final_date=${final_date}`)
-            .then(resp => this.setState({ ...this.state, medicoesFetch: resp.data }))
+            .then(resp => this.setState({ ...this.state, mostrar_datas, medicoesFetch: resp.data }))
             .catch(error => console.log(error));
     }
 
@@ -82,10 +87,26 @@ class Metrics extends Component {
                 <MetricsList list={this.state.medicoesFetch} />
                 <div className='row'>
                     <div className='col-xs-6'>
-                        <LineChartMetric title='Temperatura' data={this.state.medicoesFetch} lineKey='temp_int' XKey='data' />
+                        <LineChartMetric title='Temperatura geral no período' showChart data={this.state.medicoesFetch} lineKey='temp_int' XKey='hora' />
                     </div>
                     <div className='col-xs-6'>
-                        <LineChartMetric title='Umidade' data={this.state.medicoesFetch} lineKey='umid_int' XKey='data' />
+                        <LineChartMetric title='Umidade geral no período' showChart data={this.state.medicoesFetch} lineKey='umid_int' XKey='hora' />
+                    </div>
+                </div>
+                <div className='row'>
+                    <div className='col-xs-6'>
+                        <LineChartMetric title='Média de temperatura por hora' showChart data={this.state.medicoesFetch} lineKey='temp_int' XKey='hora' />
+                    </div>
+                    <div className='col-xs-6'>
+                        <LineChartMetric title='Média de umidade por hora' showChart data={this.state.medicoesFetch} lineKey='umid_int' XKey='hora' />
+                    </div>
+                </div>
+                <div className='row'>
+                    <div className='col-xs-6'>
+                        <LineChartMetric title='Média de temperatura por data' showChart={this.state.mostrar_datas} data={this.state.medicoesFetch} lineKey='temp_int' XKey='data' />
+                    </div>
+                    <div className='col-xs-6'>
+                        <LineChartMetric title='Média de umidade por data' showChart={this.state.mostrar_datas} data={this.state.medicoesFetch} lineKey='umid_int' XKey='data' />
                     </div>
                 </div>
             </div>
