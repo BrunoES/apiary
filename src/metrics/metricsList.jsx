@@ -26,21 +26,23 @@ export default props => {
     }
 
     return (
-        <table className='table'>
-            <thead>
-                <tr>
-                    <th>Data</th>
-                    <th>Hora</th>
-                    <th>Temp Interna</th>
-                    <th>Umid Interna</th>
-                    <th>Temp Externa</th>
-                    <th>Umid Externa</th>
-                    <th>Colmeia</th>
-                </tr>
-            </thead>
-            <tbody>
-                {renderRows()}
-            </tbody>
-        </table>
+        <div className="pre-scrollable">
+            <table className='table'>
+                <thead>
+                    <tr>
+                        <th>Data</th>
+                        <th>Hora</th>
+                        <th>Temp.Int</th>
+                        <th>Umid.Int</th>
+                        <th>Temp.Ext</th>
+                        <th>Umid.Ext</th>
+                        <th>Colmeia</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {renderRows()}
+                </tbody>
+            </table>
+        </div>
     );
 };
