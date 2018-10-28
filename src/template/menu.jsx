@@ -5,7 +5,7 @@ export default props => (
         <div className='container'>
             <div className='navbar-header'>
                 <a className='navbar-brand' href='#'>
-                    <i className='fa fa-calendar-check-o'></i> Medições - Apiário FEI (Fazendo Experimental de Iguatemí) - UEM
+                    <i className='fa fa-calendar-check-o'></i> Medições - Apiário FEI (Fazenda Experimental de Iguatemí) - UEM
                 </a>
             </div>
         </div>

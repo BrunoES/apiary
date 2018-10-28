@@ -3,7 +3,7 @@ import React from 'react';
 export default props => {
 
     const formatTemp = temp => {
-        return `${temp}º`
+        return `${temp}º C`
     }
 
     const formatUmid = umid => {

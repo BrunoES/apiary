@@ -103,10 +103,18 @@ class Metrics extends Component {
                 </div>
                 <div className='row'>
                     <div className='col-xs-6'>
-                        <LineChartMetric title='Temperatura geral no período' showChart data={this.state.medicoesFetch} lineKey='temp_int' XKey='hora' />
+                        <LineChartMetric title='Temperatura interna' showChart data={this.state.medicoesFetch} lineKey='temp_int' XKey='hora' />
                     </div>
                     <div className='col-xs-6'>
-                        <LineChartMetric title='Umidade geral no período' showChart data={this.state.medicoesFetch} lineKey='umid_int' XKey='hora' />
+                        <LineChartMetric title='Umidade interna' showChart data={this.state.medicoesFetch} lineKey='umid_int' XKey='hora' />
+                    </div>
+                </div>
+                <div className='row'>
+                    <div className='col-xs-6'>
+                        <LineChartMetric title='Temperatura externa' showChart data={this.state.medicoesFetch} lineKey='temp_ext' XKey='hora' />
+                    </div>
+                    <div className='col-xs-6'>
+                        <LineChartMetric title='Umidade externa' showChart data={this.state.medicoesFetch} lineKey='umid_ext' XKey='hora' />
                     </div>
                 </div>
             </div>
