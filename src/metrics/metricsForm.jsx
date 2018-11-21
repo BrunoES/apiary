@@ -7,8 +7,13 @@ export default props => {
         <div>
             <div>
                 <div>
+                    <select style={{ fontSize: 18 }} onChange={props.onChangeColmeia}>
+                        <option value='0'>Todas as Colmeias</option>
+                        <option value='1'>Colmeia 1</option>
+                        <option value='2'>Colmeia 2</option>
+                    </select>
                     <Calendar
-                        onChange={props.onChange}
+                        onChange={props.onChangeData}
                         value={new Date()}
                     />
                 </div>

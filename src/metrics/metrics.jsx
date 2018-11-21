@@ -14,26 +14,28 @@ class Metrics extends Component {
                 final_date: this.getDateFromJSON(new Date()),
                 medicoesFetch: [],
                 medicoesChart: [],
-                mostrar_datas: ''
+                mostrar_datas: '',
+                idColmeia: 0
             };
-        this.onChange = this.onChange.bind(this);
+        this.onChangeData = this.onChangeData.bind(this);
+        this.onChangeColmeia = this.onChangeColmeia.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
         this.handleClear = this.handleClear.bind(this);
     }
 
     componentWillMount() {
-        this.readMetrics(this.state.initial_date, this.state.final_date);
+        this.readMetrics(this.state.initial_date, this.state.final_date, this.state.idColmeia);
         this.setState({ ...this.state, medicoesChart: 
             this.reloadChartMetrics(this.state.medicoesFetch)
         });
     }
 
-    readMetrics(initial_date, final_date) {
+    readMetrics(initial_date, final_date, idColmeia) {
         let mostrar_datas = true;
         if(initial_date == final_date){
             mostrar_datas = false;
         }
-        axios.get(`http://localhost:8080/medicoes?initial_date=${initial_date}&final_date=${initial_date}`)
+        axios.get(`http://localhost:8080/medicoes?initial_date=${initial_date}&final_date=${initial_date}&idColmeia=${idColmeia}`)
             .then(resp => this.setState({ ...this.state, mostrar_datas, medicoesFetch: resp.data }))
             .catch(error => console.log(error));
     }
@@ -68,11 +70,15 @@ class Metrics extends Component {
     }
 
     handleSearch() {
-        this.readMetrics(this.state.initial_date, this.state.final_date);
+        this.readMetrics(this.state.initial_date, this.state.final_date, this.state.idColmeia);
     }
 
-    onChange(date) {
+    onChangeData(date) {
         this.setState({...this.state, initial_date: this.getDateFromJSON(date) });
+    }
+
+    onChangeColmeia(event) {
+        this.setState({...this.state, idColmeia: event.target.value });
     }
 
     handleClear() {
@@ -81,7 +87,8 @@ class Metrics extends Component {
             final_date: '15/10/2018',
             medicoesFetch: [],
             medicoesChart: [],
-            mostrar_datas: ''
+            mostrar_datas: '',
+            idColmeia: 0
         });
     }
 
@@ -92,7 +99,8 @@ class Metrics extends Component {
                     <div className='col-xs-6'>
                         <h2>Medições de {this.state.initial_date}</h2>
                         <MetricsForm
-                            onChange={this.onChange}
+                            onChangeData={this.onChangeData}
+                            onChangeColmeia={this.onChangeColmeia}
                             handleSearch={this.handleSearch}
                             handleClear={this.handleClear}
                         />
